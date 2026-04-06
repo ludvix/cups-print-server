@@ -16,16 +16,3 @@ sudo systemctl restart cups
 # Fix cups on reboot
 echo -e "#!/bin/sh\nsudo systemctl restart cups.service" | sudo tee /etc/network/if-up.d/cups
 sudo chmod +x /etc/network/if-up.d/cups
-
-# Install samba and config to make fully cross platform
-sudo apt install samba
-echo -e "[printers]
-comment = All Printers
-browseable = yes
-path = /var/spool/samba
-printable = yes
-guest ok = no
-read only = yes
-create mask = 0700" | sudo tee -a /etc/samba/smb.conf
-
-sudo systemctl restart smbd
