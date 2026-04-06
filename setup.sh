@@ -12,3 +12,7 @@ sudo sed -i "/<Location \/>/a\ Allow @local" /etc/cups/cupsd.conf
 sudo sed -i "/<Location \/admin>/a\ Allow @local" /etc/cups/cupsd.conf
 sudo sed -i "/<Location \/admin\/conf>/a\ Allow @local" /etc/cups/cupsd.conf
 sudo systemctl restart cups
+
+# Fix cups on reboot
+echo -e "#!/bin/sh\nsudo systemctl restart cups.service" | sudo tee /etc/network/if-up.d/cups
+sudo chmod +x /etc/network/if-up.d/cups
