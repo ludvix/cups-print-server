@@ -6,8 +6,8 @@ sudo apt install printer-driver-brlaser # installs drivers for brother printers
 
 sudo usermod -aG lpadmin $USER
 
+# Cups allow access from the local network
 sudo sed -i "s/Listen localhost:631/Listen $(hostname).local:631/" /etc/cups/cupsd.conf
-
 sudo sed -i "/<Location \/>/a\ Allow @local" /etc/cups/cupsd.conf
 sudo sed -i "/<Location \/admin>/a\ Allow @local" /etc/cups/cupsd.conf
 sudo sed -i "/<Location \/admin\/conf>/a\ Allow @local" /etc/cups/cupsd.conf
